@@ -1,7 +1,13 @@
 #!groovy
 
-def build() {
-    println("Building service1")
+stage "service1 Build"
+
+node {
+    sh 'echo "yahoooooo"'
 }
 
-return this
+// def build() {
+//     println("Building service1")
+// }
+
+// return this

@@ -29,8 +29,10 @@ pipeline {
 		    }
 		    steps {
 			script {
-			    service1_pipeline = load './service1-pipeline.groovy'
-			    service1_pipeline.build()
+			    // service1_pipeline = load './service1-pipeline.groovy'
+			    // service1_pipeline.build()
+
+			    evaluate(readTrusted('./service1-pipeline.groovy'))
 			}
 		    }
 		}
