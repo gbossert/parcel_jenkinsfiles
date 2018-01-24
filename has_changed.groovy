@@ -9,7 +9,7 @@ def call(String path) {
 	for (changeLog in build.changeSets) {
             for(entry in changeLog.items) {
 		for(file in entry.affectedFiles) {
-		    if file.path.contains(path) {
+		    if (file.path.toString().contains(path)) {
 			return true;
 		    }
 		    echo(">> ${file.path}");		    
