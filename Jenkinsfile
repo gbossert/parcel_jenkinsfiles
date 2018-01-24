@@ -22,9 +22,8 @@ pipeline {
 	    parallel {
 		stage('Build Service1/API') {
 		    agent {
-			node {
+			node('python') {
 			    pipeline = load './service1-pipeline.groovy'
-			    label 'python'
 			}
 		    }
 		    when {
