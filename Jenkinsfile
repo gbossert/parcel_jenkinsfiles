@@ -96,6 +96,9 @@ pipeline {
 		    }
 		}
 		stage('Test Service1/Front') {
+		    agent {
+			label 'nodejs'
+		    }
 		    when {
 			expression {
 			    return params.microservices == 'all' || params.microservices.contains('service1front')
@@ -305,40 +308,6 @@ pipeline {
 		}
 	    }	    
 	}
-
-	
-	// stage('Service2') {
-	//     when {
-	// 	expression {
-	// 	    return params.microservices == 'all' || params.microservices.containes('service2')
-	// 	}
-	//     }
-	//     stage('Build') {
-	// 	steps {
-	// 	    sh "echo 'building service2'"
-	// 	}
-	//     }
-	//     stage('Test') {
-	// 	when {
-	// 	    expression {
-	// 		return params.mode == 'normal' || params.mode == 'deploy'
-	// 	    }
-	// 	}
-	// 	steps {
-	// 	    sh "echo 'testing service2'"
-	// 	}
-	//     }
-	//     stage('Push') {
-	// 	when {
-	// 	    expression {
-	// 		return params.mode == 'deploy'
-	// 	    }
-	// 	}
-	// 	steps {
-	// 	    sh "echo 'pushing service2'"
-	// 	}
-	//     }	    
-	// }
 
 	
 	
