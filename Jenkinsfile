@@ -9,7 +9,7 @@ pipeline {
 	ENV_VAR2 = 'world'
     }
 
-    def pipeline
+    
 
     stages {
 	stage('Build Service1') {
