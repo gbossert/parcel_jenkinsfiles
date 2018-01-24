@@ -28,11 +28,10 @@ pipeline {
 			}
 		    }
 		    steps {
+			sh "echo 'building service1/api'"
 			script {
 			    service1_pipeline = load './service1-pipeline.groovy'
-			    service1_pipeline.build()
-
-			    
+			    service1_pipeline.changes()			    
 			}
 		    }
 		}
