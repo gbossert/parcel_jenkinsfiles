@@ -4,6 +4,18 @@ def call(String path) {
 
     echo("Checking if changes occurred in ${path}")
 
+    build = currentBuild
+    while(build != null && build.result != 'SUCCESS') {
+	for (changeLog in build.changeSets) {
+            for(entry in changeLog.items) {
+		for(file in entry.affectedFiles) {
+		    echo(">> ${file.path}");		    
+		}
+            }
+	}
+	build = build.previousBuild
+    }
+
     return false;
     
 }
