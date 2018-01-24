@@ -17,65 +17,50 @@ pipeline {
 		    return params.microservices == 'all' || params.microservices.containes('service1')
 		}
 	    }
-	    stage('Build') {
-		steps {
-		    sh "echo 'building service1'"
-		}
-	    }
-	    stage('Test') {
-		when {
-		    expression {
-			return params.mode == 'normal' || params.mode == 'deploy'
-		    }
-		}
-		steps {
+	    steps {		
+		sh "echo 'building service1'"
+		if (params.mode == 'normal') {
 		    sh "echo 'testing service1'"
-		}
-	    }
-	    stage('Push') {
-		when {
-		    expression {
-			return params.mode == 'deploy'
+		    if (params.mode == 'deploy') {
+			sh "echo 'pushing service1'"
 		    }
 		}
-		steps {
-		    sh "echo 'pushing service1'"
-		}
-	    }	    
+
+	    }
 	}
 
-	stage('Service2') {
-	    when {
-		expression {
-		    return params.microservices == 'all' || params.microservices.containes('service2')
-		}
-	    }
-	    stage('Build') {
-		steps {
-		    sh "echo 'building service2'"
-		}
-	    }
-	    stage('Test') {
-		when {
-		    expression {
-			return params.mode == 'normal' || params.mode == 'deploy'
-		    }
-		}
-		steps {
-		    sh "echo 'testing service2'"
-		}
-	    }
-	    stage('Push') {
-		when {
-		    expression {
-			return params.mode == 'deploy'
-		    }
-		}
-		steps {
-		    sh "echo 'pushing service2'"
-		}
-	    }	    
-	}
+	// stage('Service2') {
+	//     when {
+	// 	expression {
+	// 	    return params.microservices == 'all' || params.microservices.containes('service2')
+	// 	}
+	//     }
+	//     stage('Build') {
+	// 	steps {
+	// 	    sh "echo 'building service2'"
+	// 	}
+	//     }
+	//     stage('Test') {
+	// 	when {
+	// 	    expression {
+	// 		return params.mode == 'normal' || params.mode == 'deploy'
+	// 	    }
+	// 	}
+	// 	steps {
+	// 	    sh "echo 'testing service2'"
+	// 	}
+	//     }
+	//     stage('Push') {
+	// 	when {
+	// 	    expression {
+	// 		return params.mode == 'deploy'
+	// 	    }
+	// 	}
+	// 	steps {
+	// 	    sh "echo 'pushing service2'"
+	// 	}
+	//     }	    
+	// }
 
 	
 	
