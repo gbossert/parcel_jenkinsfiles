@@ -24,14 +24,14 @@ pipeline {
 		    }
 		    when {
 			expression {
-			    return params.microservices == 'all' || params.microservices.contains('service1api')
+			    return params.microservices == 'all' ||  load './service1-pipeline.groovy'.has_changed()
 			}
 		    }
 		    steps {
 			sh "echo 'building service1/api'"
 			script {
 			    service1_pipeline = load './service1-pipeline.groovy'
-			    service1_pipeline.changes()			    
+			    service1_pipeline.build()		    
 			}
 		    }
 		}

@@ -1,6 +1,6 @@
 #!groovy
 
-def changes() {
+def has_changed() {
     def changes = "Changes:\n"
     build = currentBuild
     while(build != null && build.result != 'SUCCESS') {
@@ -15,6 +15,7 @@ def changes() {
 	build = build.previousBuild
     }
     echo changes
+    return true
 }
 
 def build() {
