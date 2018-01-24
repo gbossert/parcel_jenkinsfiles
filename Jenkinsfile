@@ -26,10 +26,7 @@ pipeline {
 		    }
 		    when {
 			expression {
-			    return params.microservices == 'all' || load('./service1-pipeline.groovy').pipeline.has_changed()
-			    
-			    
-//			    return params.microservices == 'all' || params.microservices.contains('service1api')
+			    return params.microservices == 'all' || load('./has_changed.groovy')('/services/service1/api')
 			}
 		    }
 		    steps {
