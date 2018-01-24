@@ -1,5 +1,5 @@
 #!groovy
-
+pipeline {
 stage('Build Service1') {
     when {
 	expression {
@@ -55,7 +55,7 @@ stage('Build Service1') {
 	}
     }	    
 }
-
+}
 // // def build() {
 // //     println("Building service1")
 // // }
