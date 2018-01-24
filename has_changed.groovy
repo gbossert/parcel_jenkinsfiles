@@ -4,7 +4,7 @@ def call(String path) {
 
     echo("Checking if changes occurred in ${path}")
 
-    return true;
+    return false;
     
 }
 
