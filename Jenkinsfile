@@ -9,6 +9,8 @@ pipeline {
 	ENV_VAR2 = 'world'
     }
 
+    def pipeline
+
     stages {
 	stage('Build Service1') {
 	    when {
@@ -20,19 +22,25 @@ pipeline {
 	    parallel {
 		stage('Build Service1/API') {
 		    agent {
-			label 'python'
+			node {
+			    pipeline = load './service1-pipeline.groovy'
+			    label 'python'
+			}
 		    }
 		    when {
 			expression {
-			    return params.microservices == 'all' ||  load './service1-pipeline.groovy'.has_changed()
+			    return params.microservices == 'all' ||pipeline.has_changed()
+			    
+			    
+//			    return params.microservices == 'all' || params.microservices.contains('service1api')
 			}
 		    }
 		    steps {
 			sh "echo 'building service1/api'"
-			script {
-			    service1_pipeline = load './service1-pipeline.groovy'
-			    service1_pipeline.build()		    
-			}
+			// script {
+			//     service1_pipeline = load './service1-pipeline.groovy'
+			//     service1_pipeline.changes()			    
+			// }
 		    }
 		}
 		stage('Build Service1/Worker') {
