@@ -26,7 +26,7 @@ pipeline {
 		    }
 		    when {
 			expression {
-			    return params.microservices == 'all' || load('./has_changed.groovy')('/services/service1/api')
+			    return params.microservices == 'all' || load('./has_changed.groovy')('services/service1/api/')
 			}
 		    }
 		    steps {
