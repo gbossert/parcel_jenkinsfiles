@@ -22,13 +22,11 @@ pipeline {
 	    parallel {
 		stage('Build Service1/API') {
 		    agent {
-			node('python') {
-			    pipeline = load './service1-pipeline.groovy'
-			}
+			label 'python'
 		    }
 		    when {
 			expression {
-			    return params.microservices == 'all' ||pipeline.has_changed()
+			    return params.microservices == 'all' || load('./service1-pipeline.groovy').pipeline.has_changed()
 			    
 			    
 //			    return params.microservices == 'all' || params.microservices.contains('service1api')
