@@ -1,5 +1,7 @@
 #!groovy
 
+has_changed = load('./has_changed.groovy')
+
 pipeline {
 
     agent none
@@ -22,7 +24,7 @@ pipeline {
 		    when {
 			expression {
 			    return params.microservices == 'all' || params.microservices.contains('service1api') \
-			    || load('./has_changed.groovy')(['services/service1/api/', 'libs/lib1'])
+			    || has_changed(['services/service1/api/', 'libs/lib1'])
 			}
 		    }
 		    steps {
