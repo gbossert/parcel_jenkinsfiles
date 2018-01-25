@@ -31,14 +31,9 @@ pipeline {
 			}
 		    }
 		    steps {
-			parallel {
-			    stage('sh') {
-				steps {
-				    sh "echo 'building service1/api'"
-				}
-			    }
-			}
-			
+			script {
+			    sh "echo 'building service1/api'"
+			}			
 		    }
 		}
 		stage('Build Service1/Worker') {
