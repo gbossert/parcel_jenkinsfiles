@@ -1,20 +1,21 @@
 #!groovy
 
-def call(String path) {
+def call(List<String> paths) {
 
-    echo("Checking if changes occurred in ${path}")
+    echo("Checking if changes occurred in ${paths}")
 
     build = currentBuild
     while(build != null && build.result != 'SUCCESS') {
 	for (changeLog in build.changeSets) {
             for(entry in changeLog.items) {
 		for(file in entry.affectedFiles) {
-
-		    if (file.path.toString().contains(path)) {
-			echo("!! ${file.path}");		    			
-			return true;
+		    for (path in paths) {
+			if (file.path.toString().contains(path)) {
+			    echo("!! ${file.path}");		    			
+			    return true;
+			}
+			echo(">> ${file.path} (${path})");
 		    }
-		    echo(">> ${file.path} (${path})");		    
 		}
             }
 	}
