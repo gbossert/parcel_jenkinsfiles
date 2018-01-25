@@ -36,7 +36,6 @@ pipeline {
 		    post {
 			failure {
 			    def response = httpRequest httpMode: 'POST', requestBody: "text=ALERT: Service1-API failed to build !", url: 'https://8b8b0cf4.ngrok.io/api/v1/tts'
-			    def response = httpRequest 
 			    println("Status: "+response.status)
 			}
 		    }
