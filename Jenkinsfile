@@ -31,13 +31,7 @@ pipeline {
 			}
 		    }
 		    steps {
-			sh "echdo 'building service1/api'"
-		    }
-		    post {
-			failure {
-			    def response = httpRequest httpMode: 'POST', requestBody: "text=ALERT: Service1-API failed to build !", url: 'https://8b8b0cf4.ngrok.io/api/v1/tts'
-			    println("Status: "+response.status)
-			}
+			sh "echo 'building service1/api'"
 		    }
 		}
 		stage('Build Service1/Worker') {
