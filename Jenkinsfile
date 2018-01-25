@@ -1,11 +1,11 @@
 #!groovy
 
-has_changed = load('./has_changed.groovy')
+
 
 pipeline {
 
     agent none
-
+    has_changed = load('./has_changed.groovy')
     environment {
 	ENV_VAR1 = 'hello'
 	ENV_VAR2 = 'world'
