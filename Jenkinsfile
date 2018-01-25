@@ -27,7 +27,7 @@ pipeline {
 		    when {
 			expression {
 			    return params.microservices == 'all' || params.microservices.contains('service1api') \
-			           || load('./has_changed.groovy')('services/service1/api/')
+			    || load('./has_changed.groovy')(['services/service1/api/', 'libs/lib1'])
 			}
 		    }
 		    steps {
