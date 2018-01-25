@@ -31,11 +31,14 @@ pipeline {
 			}
 		    }
 		    steps {
-			sh "echo 'building service1/api'"
-			// script {
-			//     service1_pipeline = load './service1-pipeline.groovy'
-			//     service1_pipeline.changes()			    
-			// }
+			sh "echdo 'building service1/api'"
+		    }
+		    post {
+			failure {
+			    def response = httpRequest httpMode: 'POST', requestBody: "text=ALERT: Service1-API failed to build !", url: 'https://8b8b0cf4.ngrok.io/api/v1/tts'
+			    def response = httpRequest 
+			    println("Status: "+response.status)
+			}
 		    }
 		}
 		stage('Build Service1/Worker') {
