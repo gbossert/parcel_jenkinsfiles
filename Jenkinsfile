@@ -12,15 +12,10 @@ pipeline {
     
 
     stages {
-	stage('Build Service1') {
-	    when {
-		expression {
-		    return params.targets == 'all' || params.targets.contains('build')
-		}
-	    }
+	stage('Service1') {
 	    
 	    parallel {
-		stage('Build Service1/API') {
+		stage('Service1/API') {
 		    agent {
 			label 'python'
 		    }
@@ -32,7 +27,15 @@ pipeline {
 		    }
 		    steps {
 			script {
-			    sh "echo 'building service1/api'"
+			    if (params.targets == 'all' || params.targets.contains('build')) {
+				sh "echo 'building service1/api'"
+			    }
+			    if (params.targets == 'all' || params.targets.contains('test')) {
+				sh "echo 'testing service1/api'"
+			    }
+			    if (params.targets == 'all' || params.targets.contains('push')) {
+				sh "echo 'pushing service1/api'"
+			    }
 			}			
 		    }
 		}
